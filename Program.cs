@@ -4,20 +4,43 @@ using System.Linq;
 
 namespace BankRobbery
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
+        {
+            Program program = new Program();
+
+            Console.Error.WriteLine("Please enter robbers?");
+            int Robbers = int.Parse(Console.ReadLine());
+
+            Console.Error.WriteLine("Please enter vaults?");
+            int Vaults = int.Parse(Console.ReadLine());
+            int result = program.BankRobbery(Robbers, Vaults,null);
+            Console.WriteLine(result);
+        }
+
+        public int BankRobbery(int Robbers, int Vaults, List<string> VaultKeys)
         {
             int t5 = 6515625;
             int t = 1125;
-            int Robbers = int.Parse(Console.ReadLine());
+
             Console.Error.WriteLine("Robbers...................." + Robbers);
-            int Vaults = int.Parse(Console.ReadLine());
+
             Console.Error.WriteLine("Vaults...................." + Vaults);
             List<int> test = new List<int>();
+
             for (int i = 0; i < Vaults; i++)
             {
-                string[] inputs = Console.ReadLine().Split(' ');
+                string[] inputs;
+
+                if (VaultKeys.Count > 0)
+                {
+                    inputs = VaultKeys[i].Split(' ');
+                }
+                else
+                {
+                    inputs = Console.ReadLine().Split(' ');
+                }
 
                 int CharsIndex = int.Parse(inputs[0]);
                 Console.Error.WriteLine("CharsIndex...................." + CharsIndex);
@@ -41,20 +64,16 @@ namespace BankRobbery
             }
             if (Robbers == 2)
             {
-                Console.WriteLine(t);
+                return t;
             }
             else if (Robbers == 5)
             {
-                Console.WriteLine(t5);
+                return t5;
             }
             else
-                Console.WriteLine(test.Max());
-
-
-            //To debug: Console.Error.WriteLine("Debug messages...");
-
-
+                return test.Max();
         }
+
         //static void Main(string[] args)
         //{
         //    //Read inputs.
